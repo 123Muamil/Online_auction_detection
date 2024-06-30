@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
-    mobileNumber: "",
+    phone_number: "",
     email: "",
-    idCard: "",
+    id_card: "",
     address:"",
     password: "",
     password2: "",
@@ -33,9 +33,9 @@ const Signup = () => {
           navigate('/')
           setFormData({
             name: "",
-            mobileNumber: "",
+            phone_number: "",
             email: "",
-            idCard: "",
+            id_card: "",
             address: "",
             password: "",
             password2: "",
@@ -107,10 +107,10 @@ const Signup = () => {
                     <input
                       type="tel"
                       className="form-control"
-                      id="mobileNumber"
+                      id="phone_number"
                       placeholder="Enter your mobile number"
-                      name="mobileNumber"
-                      value={formData.mobileNumber}
+                      name="phone_number"
+                      value={formData.phone_number}
                       onChange={handleChange}
                     />
                   </div>
@@ -121,10 +121,10 @@ const Signup = () => {
                     <input
                       type="text"
                       className="form-control"
-                      id="idCard"
+                      id="id_card"
                       placeholder="Enter your username"
-                      name="idCard"
-                      value={formData.idCard}
+                      name="id_card"
+                      value={formData.id_card}
                       onChange={handleChange}
                     />
                   </div>

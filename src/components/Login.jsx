@@ -21,23 +21,35 @@ const Login = () => {
       const response=await axios.post('http://127.0.0.1:8000/api/login/',formData)
       console.log("The response is:",response)
       localStorage.setItem("token",response.data.token)
-      if(response.data.is_buyer===true)
+       if(response.data.is_superuser===true)
         {
+             localStorage.setItem('is_superuser',response.data.is_superuser)
+             navigate('/admin')
+             setFormData({
+              username: "",
+              password: "",
+            });  
+        }
+       if(response.data.is_buyer===true)
+        {
+          localStorage.setItem('is_buyer',response.data.is_buyer)
           navigate('/user')
           setFormData({
             username: "",
             password: "",
           }); 
         }
-      else if(response.data.is_seller===true)
+      if(response.data.is_seller===true)
         {
           localStorage.setItem('is_seller',response.data.is_seller)
+          localStorage.setItem('username',response.data.username)
           navigate('/seller')
           setFormData({
             username: "",
             password: "",
           });  
         }
+  
     } catch (error) {
       console.log("Error while login",error)
     }
@@ -54,7 +66,7 @@ const Login = () => {
       <div className="col-md-6">
         <div className="card shadow" style={{ width: 350 }}>
           <div className="card-body">
-            <h3 className="card-title text-center">User Login</h3>
+            <h3 className="card-title text-center">Login</h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">

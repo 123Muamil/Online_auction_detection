@@ -1,6 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const UserNavbar = () => {
+  const navigate=useNavigate()
+  const Logout=()=>{
+     localStorage.removeItem('token')
+     localStorage.removeItem('is_buyer')
+      navigate('/')
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div className="container">
@@ -42,7 +49,7 @@ const UserNavbar = () => {
             </li> */}
           </ul>
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+            <li className="nav-item" onClick={Logout}>
               <a className="nav-link" href="#">
                 Logout
               </a>

@@ -3,8 +3,10 @@ import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 const SellerNavbar = () => {
   const navigate=useNavigate()
-  const Logout=async()=>{
-     await localStorage.removeItem('token')
+  const Logout=()=>{
+     localStorage.removeItem('token')
+     localStorage.removeItem('is_seller')
+     localStorage.removeItem('username')
       navigate('/')
   }
   return (
