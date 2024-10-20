@@ -11,7 +11,7 @@ const ViewProducts = () => {
   }, [])
   const getAllProducts=async()=>{
      try {
-       const response= await axios.get('http://localhost:8000/api/all-products/')
+       const response= await axios.get('https://online-auction-detection-backend.vercel.app/api/all-products/')
       //  console.log("The response A is:",response.data)
        setAllProducts(response.data.filter((item)=>item.seller_username===username))
      } catch (error) {
@@ -22,7 +22,7 @@ const ViewProducts = () => {
     const token = localStorage.getItem('token');
     console.log("The token is:",token)
     try {
-      const response = await axios.delete(`http://localhost:8000/api/products/${id}/`, {
+      const response = await axios.delete(`https://online-auction-detection-backend.vercel.app/api/products/${id}/`, {
         headers: {
           'Authorization': `Token ${token}`, // Use the stored token here
           'Content-Type': 'application/json'

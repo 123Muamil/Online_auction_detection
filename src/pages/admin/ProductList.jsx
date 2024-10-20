@@ -9,7 +9,7 @@ function ProductList() {
     const fetchProducts = async () => {
         const token=localStorage.getItem('token')
       try {
-        const response = await axios.get('http://localhost:8000/api/by-seller/', {
+        const response = await axios.get('https://online-auction-detection-backend.vercel.app/api/by-seller/', {
           headers: {
             Authorization: `Token ${token}`,
           },

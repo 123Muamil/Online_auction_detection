@@ -18,7 +18,7 @@ const Login = () => {
   const handleSubmit =async (e) => {
     e.preventDefault();
     try {
-      const response=await axios.post('http://127.0.0.1:8000/api/login/',formData)
+      const response=await axios.post('https://online-auction-detection-backend.vercel.app/api/login/',formData)
       console.log("The response is:",response)
       localStorage.setItem("token",response.data.token)
        if(response.data.is_superuser===true)

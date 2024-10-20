@@ -49,7 +49,7 @@ const SellProduct = () => {
     formData.append("seller", sellerId);
     
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/products/', formData, {
+      const response = await axios.post('https://online-auction-detection-backend.vercel.app/api/products/', formData, {
         headers: {
           'Authorization': `Token ${token}`
         }

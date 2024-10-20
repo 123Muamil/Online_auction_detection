@@ -7,7 +7,7 @@ const DetectMultipleSellerAccounts = () => {
     const handleCheck = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('http://localhost:8000/api/check-duplicates/');
+            const response = await axios.get('https://online-auction-detection-backend.vercel.app/api/check-duplicates/');
             console.log("Multiple User Response is:",response)
             setMultipleAccounts(response.data.duplicates);
             setLoading(false);

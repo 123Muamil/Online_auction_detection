@@ -10,7 +10,7 @@ const ProductList = () => {
   }, [])
   const getAllProducts=async()=>{
      try {
-       const response= await axios.get('http://localhost:8000/api/all-products/')
+       const response= await axios.get('https://online-auction-detection-backend.vercel.app/api/all-products/')
       //  console.log("The response is:",response)
        setAllProducts(response.data)
      } catch (error) {

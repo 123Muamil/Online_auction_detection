@@ -11,7 +11,7 @@ const UserStatus = () => {
 
   const getAllUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/users/');
+      const response = await axios.get('https://online-auction-detection-backend.vercel.app/api/users/');
       setUsers(response.data);
     } catch (error) {
       console.log("Error while fetching users:", error);

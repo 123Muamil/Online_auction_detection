@@ -26,7 +26,7 @@ const Signup = () => {
   const handleSubmit =async (e) => {
     e.preventDefault();
     try {
-      const response=await axios.post('http://127.0.0.1:8000/api/singup/seller/',formData)
+      const response=await axios.post('https://online-auction-detection-backend.vercel.app/api/singup/seller/',formData)
       // console.log("The response is:",)
       if(response.data.user.is_seller===true)
         {
