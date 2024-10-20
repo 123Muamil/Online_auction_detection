@@ -1,169 +1,15 @@
-// import React from "react";
-
-// const BlockUser = () => {
-//   return (
-//     <div className="container">
-//       <h2 className="mt-5 mb-4">Block Users</h2>
-//       <table className="table align-middle mb-0 bg-white">
-//         <thead className="bg-light">
-//           <tr>
-//             <th>Name</th>
-//             <th>Status</th>
-//             <th>Points</th>
-//             <th>Block Status</th>
-//             <th>Block User</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           <tr>
-//             <td>
-//               <div className="d-flex align-items-center">
-//                 <img
-//                   src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-//                   alt=""
-//                   style={{ width: 45, height: 45 }}
-//                   className="rounded-circle"
-//                 />
-//                 <div className="ms-3">
-//                   <p className="fw-bold mb-1">John Doe</p>
-//                   <p className="text-muted mb-0">john.doe@gmail.com</p>
-//                 </div>
-//               </div>
-//             </td>
-//             <td>
-//               <p className="fw-normal mb-1">Software engineer</p>
-//               <p className="text-muted mb-0">IT department</p>
-//             </td>
-//             <td>
-//               <span
-//                 className="badge badge-success rounded-pill d-inline"
-//                 style={{ color: "#000" }}
-//               >
-//                 Active
-//               </span>
-//             </td>
-//             <td>Senior</td>
-//             <td>
-//               <button
-//                 type="button"
-//                 className="btn btn-link btn-sm btn-rounded"
-//                 style={{
-//                   background: "green",
-//                   color: "#FFF",
-//                   textDecoration: "none",
-//                 }}
-//               >
-//                 <i className="bi bi-ban"></i>
-//               </button>
-//             </td>
-//           </tr>
-//           <tr>
-//             <td>
-//               <div className="d-flex align-items-center">
-//                 <img
-//                   src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-//                   className="rounded-circle"
-//                   alt=""
-//                   style={{ width: 45, height: 45 }}
-//                 />
-//                 <div className="ms-3">
-//                   <p className="fw-bold mb-1">Alex Ray</p>
-//                   <p className="text-muted mb-0">alex.ray@gmail.com</p>
-//                 </div>
-//               </div>
-//             </td>
-//             <td>
-//               <p className="fw-normal mb-1">Consultant</p>
-//               <p className="text-muted mb-0">Finance</p>
-//             </td>
-//             <td>
-//               <span
-//                 className="badge badge-primary rounded-pill d-inline"
-//                 style={{ color: "#000" }}
-//               >
-//                 Onboarding
-//               </span>
-//             </td>
-//             <td>Junior</td>
-//             <td>
-//               <button
-//                 type="button"
-//                 className="btn btn-link btn-rounded btn-sm fw-bold"
-//                 data-mdb-ripple-color="dark"
-//                 style={{
-//                   background: "green",
-//                   color: "#FFF",
-//                   textDecoration: "none",
-//                 }}
-//               >
-//                 <i className="bi bi-ban"></i>
-//               </button>
-//             </td>
-//           </tr>
-//           <tr>
-//             <td>
-//               <div className="d-flex align-items-center">
-//                 <img
-//                   src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-//                   className="rounded-circle"
-//                   alt=""
-//                   style={{ width: 45, height: 45 }}
-//                 />
-//                 <div className="ms-3">
-//                   <p className="fw-bold mb-1">Kate Hunington</p>
-//                   <p className="text-muted mb-0">kate.hunington@gmail.com</p>
-//                 </div>
-//               </div>
-//             </td>
-//             <td>
-//               <p className="fw-normal mb-1">Designer</p>
-//               <p className="text-muted mb-0">UI/UX</p>
-//             </td>
-//             <td>
-//               <span
-//                 className="badge badge-warning rounded-pill d-inline"
-//                 style={{ color: "#000" }}
-//               >
-//                 Awaiting
-//               </span>
-//             </td>
-//             <td>Senior</td>
-//             <td>
-//               <button
-//                 type="button"
-//                 className="btn btn-link btn-rounded btn-sm fw-bold"
-//                 data-mdb-ripple-color="dark"
-//                 style={{
-//                   background: "green",
-//                   color: "#FFF",
-//                   textDecoration: "none",
-//                 }}
-//               >
-//                 <i className="bi bi-ban"></i>
-//               </button>
-//             </td>
-//           </tr>
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default BlockUser;
-// DetectMultipleSellerAccounts.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import '../../styles/duplicates.css'
 const DetectMultipleSellerAccounts = () => {
     const [multipleAccounts, setMultipleAccounts] = useState([]);
     const [loading, setLoading] = useState(false);
     const handleCheck = async () => {
         try {
             setLoading(true);
-            const response = await axios.post('http://localhost:8000/api/detect_duplicate_sellers/');
+            const response = await axios.get('http://localhost:8000/api/check-duplicates/');
             console.log("Multiple User Response is:",response)
-            setMultipleAccounts(response.data.sellers_with_multiple_accounts);
+            setMultipleAccounts(response.data.duplicates);
             setLoading(false);
         } catch (error) {
             console.error('Error:', error);
@@ -171,18 +17,31 @@ const DetectMultipleSellerAccounts = () => {
             alert("Error occurred while checking accounts");
         }
     };
-
     return (
         <div>
-            <button onClick={handleCheck} disabled={loading}>
+            
+            {multipleAccounts.length === 0?<div style={{display:'flex',justifyContent:'center',alignItems:'center',textAlign:'center',marginTop:'300px'}}><button style={{borderRadius:"20px"}}  onClick={handleCheck} disabled={loading}>
                 {loading ? 'Checking...' : 'Check Multiple Seller Accounts'}
-            </button>
-            {multipleAccounts.length > 0 && (
-                <div>
-                    <h3>Sellers with Multiple Accounts:</h3>
-                    <ul>
-                        {multipleAccounts.map((username, index) => (
-                            <li key={index}>{username}</li>
+            </button></div> : (
+                <div className='container'>
+                    <h3 className='text-center mt-5 mb-5' style={{color:'#333'}}>Sellers with Multiple Accounts</h3>
+                    <ul className='row'>
+                        {multipleAccounts.map((item, index) => (
+                            <li className='col-md-4 mb-5'  key={index}> <div className="Card">
+                            <div className="Card-header">
+                                <h2 className="name">{item.name}</h2>
+                            </div>
+                            <div className="Card-body">
+                                <p><strong>Address:</strong> {item.address}</p>
+                                <p><strong>Date of Birth:</strong> {item.date_of_birth}</p>
+                                <p><strong>Email:</strong> {item.email}</p>
+                                <p><strong>ID Card:</strong>{item.id_card}</p>
+                                <p><strong>Phone Number:</strong> {item.phone_number}</p>
+                            </div>
+                            <div class="Card-footer">
+            <button class="remove-button" style={{borderRadius:"20px"}}>Remove Account</button>
+        </div>
+                        </div></li>
                         ))}
                     </ul>
                 </div>
