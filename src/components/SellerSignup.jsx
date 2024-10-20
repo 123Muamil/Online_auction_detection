@@ -23,30 +23,32 @@ const Signup = () => {
     }));
   };
 
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response=await axios.post('https://online-auction-detection-backend.vercel.app/api/singup/seller/',formData)
-      // console.log("The response is:",)
-      if(response.data.user.is_seller===true)
-        {
-          navigate('/')
-          setFormData({
-            name: "",
-            phone_number: "",
-            email: "",
-            id_card: "",
-            address: "",
-            password: "",
-            password2: "",
-            username: ""
-          }); 
+        const response = await axios.post('https://online-auction-detection-backend.vercel.app/api/singup/seller/', formData, {
+            headers: {
+                'Content-Type': 'application/json',  
+            },
+        });
+        if (response.data.user.is_seller === true) {
+            navigate('/');
+            setFormData({
+                name: "",
+                phone_number: "",
+                email: "",
+                id_card: "",
+                address: "",
+                password: "",
+                password2: "",
+                username: "",
+            });
         }
-
     } catch (error) {
-      console.log("The error while making request",error)
+        console.log("The error while making request", error);
     }
-  };
+};
+
 
   return (
     <div className="auth-container">
